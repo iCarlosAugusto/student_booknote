@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:student_booknote/repositories/subject_repository.dart';
 import 'package:student_booknote/views/home/home_view.dart';
 
-void main() {
+final getIt = GetIt.instance;
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  getIt.registerSingleton<SubjectRepository>(SubjectRepository());
   runApp(const MyApp());
 }
 

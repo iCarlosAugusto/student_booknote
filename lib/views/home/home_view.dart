@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:student_booknote/repositories/subject_repository.dart';
 import 'package:student_booknote/widgets/card_partner_widget.dart';
 import 'package:student_booknote/widgets/text_widget.dart';
+
+import '../../main.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -27,7 +31,8 @@ class HomeView extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () async {
+        },
       ),
     );
   }
