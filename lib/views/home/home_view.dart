@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:student_booknote/repositories/subject_repository.dart';
+import 'package:student_booknote/widgets/appbar_widget.dart';
 import 'package:student_booknote/widgets/card_partner_widget.dart';
-import 'package:student_booknote/widgets/text_widget.dart';
-
-import '../../main.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -12,12 +9,21 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     
     return Scaffold(
+      appBar: AppbarWidget(
+        elevation: 0,
+        title: 'Minhas matérias',
+        actions: [
+          IconButton(
+            onPressed: () {}, 
+            icon: const Icon(Icons.filter_1_outlined)
+          )
+        ],
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
           child: Column(
             children: [
-              const TextWidget('Minhas matérias'),
               Expanded(
                 child: ListView.separated(
                   itemBuilder: (_,__) => CardPartnersWidget(onTap: () {}),
