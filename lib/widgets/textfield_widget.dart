@@ -28,6 +28,7 @@ class TextfieldWidget extends StatelessWidget {
     return Container(
       margin: margin,
       child: TextFormField(
+        scrollPadding:  const EdgeInsets.only(bottom: 50),
         inputFormatters: inputFormatters,
         keyboardType: keyboardType,
         controller: controller,
