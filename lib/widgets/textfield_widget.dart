@@ -11,7 +11,8 @@ class TextfieldWidget extends StatelessWidget {
       this.validator,
       this.keyboardType,
       this.margin,
-      this.inputFormatters
+      this.inputFormatters,
+      this.maxLength
     });
 
   final String? label;
@@ -22,12 +23,14 @@ class TextfieldWidget extends StatelessWidget {
   final TextInputType? keyboardType;
   final EdgeInsets? margin;
   final List<TextInputFormatter>? inputFormatters;
+  final int? maxLength; 
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: margin,
       child: TextFormField(
+        maxLength: maxLength,
         scrollPadding:  const EdgeInsets.only(bottom: 50),
         inputFormatters: inputFormatters,
         keyboardType: keyboardType,

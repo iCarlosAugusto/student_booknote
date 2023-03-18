@@ -21,7 +21,7 @@ class SubjectView extends StatelessWidget {
           Expanded(
             child: ListView.separated(
               itemBuilder: (_,__) => CardAnotationWidget(
-                onTap: () => print('')
+                onTap: () => context.pushNamed('/anotation')
               ),
               separatorBuilder: (_,__) => const SizedBox(height: 16),
               itemCount: 30

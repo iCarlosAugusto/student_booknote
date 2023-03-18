@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:student_booknote/views/anotation/anotation_view.dart';
 import 'package:student_booknote/views/home/home_view.dart';
 import 'package:student_booknote/views/subject/subject_view.dart';
 
@@ -14,6 +15,11 @@ final router = GoRouter(
       path: '/subject',
       name: '/subject',
       builder: (context, state) => const SubjectView(),
+    ),
+    GoRoute(
+      path: '/anotation',
+      name: '/anotation',
+      builder: (context, state) => const AnotationView(),
     ),
   ],
 );

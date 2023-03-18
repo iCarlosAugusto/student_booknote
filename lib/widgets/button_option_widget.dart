@@ -24,7 +24,7 @@ class ButtonOptionWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextWidget(title, fontSize: AvailableFontSizes.small, color: Colors.grey),
-              const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 32)
+              const Icon(Icons.add, color: Colors.grey, size: 32)
             ],
           ),
         ),
