@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:student_booknote/repositories/subject_repository.dart';
-import 'package:student_booknote/views/home/home_view.dart';
+import 'package:student_booknote/routes/routes.dart';
 
 final getIt = GetIt.instance;
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   getIt.registerSingleton<SubjectRepository>(SubjectRepository());
@@ -16,7 +15,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'Flutter Demo',
       theme: ThemeData(
         inputDecorationTheme: const InputDecorationTheme(
@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         ),
         primarySwatch: Colors.blue,
       ),
-      home: const HomeView(),
     );
   }
 }

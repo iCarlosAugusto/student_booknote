@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:student_booknote/widgets/appbar_widget.dart';
-import 'package:student_booknote/widgets/card_partner_widget.dart';
+import 'package:student_booknote/widgets/card_subject_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -26,7 +27,9 @@ class HomeView extends StatelessWidget {
             children: [
               Expanded(
                 child: ListView.separated(
-                  itemBuilder: (_,__) => CardPartnersWidget(onTap: () {}),
+                  itemBuilder: (_,__) => CardSubjectWidget(
+                    onTap: () => context.pushNamed('/subject')
+                  ),
                   separatorBuilder: (_,__) => const SizedBox(height: 16),
                   itemCount: 30
                 ),
