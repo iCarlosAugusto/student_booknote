@@ -2,7 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:student_booknote/widgets/text_widget.dart';
 
 class CardSubjectWidget extends StatelessWidget {
-  const CardSubjectWidget({super.key, required this.onTap});
+  CardSubjectWidget({super.key, required this.onTap, required this.name, required this.professor, this.anototaionsAmount});
+
+  String name;
+  String professor;
+  int? anototaionsAmount;
+
 
   final void Function() onTap; 
 
@@ -24,10 +29,10 @@ class CardSubjectWidget extends StatelessWidget {
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    TextWidget('Matemática', isFontWeight: true),
+                  children: [
+                    TextWidget(name, isFontWeight: true),
                     TextWidget(
-                      'Professor Gustavo',
+                      professor,
                       fontSize: AvailableFontSizes.small
                     ),
                   ],
@@ -44,9 +49,9 @@ class CardSubjectWidget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Row(
-                        children: const[
-                          Icon(Icons.bookmark, color: Colors.blue),
-                          TextWidget('11 anotações'),
+                        children: [
+                          const Icon(Icons.bookmark, color: Colors.blue),
+                          TextWidget(anototaionsAmount == null ? '0' : anototaionsAmount.toString()),
                         ],
                       ),
                     ],

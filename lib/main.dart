@@ -7,6 +7,7 @@ final getIt = GetIt.instance;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   getIt.registerSingleton<SubjectRepository>(SubjectRepository());
+  await getIt<SubjectRepository>().init();
   runApp(const MyApp());
 }
 

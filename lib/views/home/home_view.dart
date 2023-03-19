@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:student_booknote/views/home/home_controller.dart';
 import 'package:student_booknote/widgets/appbar_widget.dart';
 import 'package:student_booknote/widgets/button_widget.dart';
 import 'package:student_booknote/widgets/card_subject_widget.dart';
 import 'package:student_booknote/widgets/text_widget.dart';
 import 'package:student_booknote/widgets/textfield_widget.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    HomeController homeController = HomeController();
+
     return Scaffold(
       appBar: AppbarWidget(
         elevation: 0,
@@ -26,11 +30,19 @@ class HomeView extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: ListView.separated(
-                    itemBuilder: (_, __) => CardSubjectWidget(
-                        onTap: () => context.pushNamed('/subject')),
+                child: Observer(
+                    builder: (_) =>
+                  ListView.separated(
+                    itemBuilder: (_, int index) => CardSubjectWidget(
+                      name: homeController.subjects[index].name,
+                      professor: homeController.subjects[index].professor,
+                      anototaionsAmount: homeController.subjects[index].anotations?.length,
+                      onTap: () => context.pushNamed('/subject')
+                    ),
                     separatorBuilder: (_, __) => const SizedBox(height: 16),
-                    itemCount: 30),
+                    itemCount: homeController.subjects.length
+                  )
+                ),
               )
             ],
           ),
@@ -69,9 +81,17 @@ class HomeView extends StatelessWidget {
                       child: Column(
                         children: [
                           const TextWidget('Criar nova matéria'),
-                          const TextfieldWidget(label: 'Nome da matéria', margin: EdgeInsets.only(top: 16, bottom: 16)),
-                          const TextfieldWidget(label: 'Nome do professor', margin: EdgeInsets.only(bottom: 16),),
-                          ButtonWidget(title: 'Criar matéria', onTap: () {}),
+                          TextfieldWidget(
+                            label: 'Nome da matéria',
+                            margin: const EdgeInsets.only(top: 16, bottom: 16),
+                            controller: homeController.subjectNameTextfieldController,
+                          ),
+                          TextfieldWidget(
+                            label: 'Nome do professor',
+                            margin: const EdgeInsets.only(bottom: 16),
+                            controller: homeController.subjectProfessorTextfieldController,
+                          ),
+                          ButtonWidget(title: 'Criar matéria', onTap: homeController.createSubject),
                         ],
                       ),
                     )

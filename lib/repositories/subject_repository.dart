@@ -6,23 +6,21 @@ class SubjectRepository {
 
   late final Store store;
 
-  SubjectRepository(){
-    _init();
-  }
-
-  _init() async {
+  init() async {
     store = await openStore();
   }
 
-  Future<void> save() async {
-    var entityTest = SujectEntity(name: 'Matemática', professor: 'Carlos',);
+  //Future<void> save({required String name, required String professor}) async {
+    //SujectEntity subjectEntity = SujectEntity(name: name, professor: professor);
+    Future<void> save({required SujectEntity subjectEntity}) async {
     Box subjectBox = store.box<SujectEntity>();
-    subjectBox.put(entityTest);
+    subjectBox.put(subjectEntity);
   }
 
-  Future get() async {
+  Future<List<SujectEntity>> get() async {
     Box subjectBox = store.box<SujectEntity>();
     final subject = subjectBox.getAll();
+    return subject as List<SujectEntity>;
   }
 
   remove() async {

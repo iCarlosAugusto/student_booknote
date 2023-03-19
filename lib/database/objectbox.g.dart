@@ -14,6 +14,7 @@ import 'package:objectbox/internal.dart'; // generated code can access "internal
 import 'package:objectbox/objectbox.dart';
 import 'package:objectbox_flutter_libs/objectbox_flutter_libs.dart';
 
+import '../entities/anotation_entity.dart';
 import '../entities/subject_entity.dart';
 
 export 'package:objectbox/objectbox.dart'; // so that callers only have to import this file
@@ -42,6 +43,35 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(2, 8068563579642085581),
+      name: 'AnotationEntity',
+      lastPropertyId: const IdUid(4, 8223025405263496351),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 2397109208251437942),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 1819245330871585954),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 9007625859033890139),
+            name: 'description',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(4, 8223025405263496351),
+            name: 'images',
+            type: 30,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -65,7 +95,7 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(1, 7655759539583557121),
+      lastEntityId: const IdUid(2, 8068563579642085581),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
@@ -108,6 +138,48 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    AnotationEntity: EntityDefinition<AnotationEntity>(
+        model: _entities[1],
+        toOneRelations: (AnotationEntity object) => [],
+        toManyRelations: (AnotationEntity object) => {},
+        getId: (AnotationEntity object) => object.id,
+        setId: (AnotationEntity object, int id) {
+          object.id = id;
+        },
+        objectToFB: (AnotationEntity object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final descriptionOffset = object.description == null
+              ? null
+              : fbb.writeString(object.description!);
+          final imagesOffset = object.images == null
+              ? null
+              : fbb.writeList(
+                  object.images!.map(fbb.writeString).toList(growable: false));
+          fbb.startTable(5);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, descriptionOffset);
+          fbb.addOffset(3, imagesOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = AnotationEntity(
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              description: const fb.StringReader(asciiOptimization: true)
+                  .vTableGetNullable(buffer, rootOffset, 8),
+              images: const fb.ListReader<String>(
+                      fb.StringReader(asciiOptimization: true),
+                      lazy: false)
+                  .vTableGetNullable(buffer, rootOffset, 10))
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
@@ -127,4 +199,23 @@ class SujectEntity_ {
   /// see [SujectEntity.professor]
   static final professor =
       QueryStringProperty<SujectEntity>(_entities[0].properties[2]);
+}
+
+/// [AnotationEntity] entity fields to define ObjectBox queries.
+class AnotationEntity_ {
+  /// see [AnotationEntity.id]
+  static final id =
+      QueryIntegerProperty<AnotationEntity>(_entities[1].properties[0]);
+
+  /// see [AnotationEntity.name]
+  static final name =
+      QueryStringProperty<AnotationEntity>(_entities[1].properties[1]);
+
+  /// see [AnotationEntity.description]
+  static final description =
+      QueryStringProperty<AnotationEntity>(_entities[1].properties[2]);
+
+  /// see [AnotationEntity.images]
+  static final images =
+      QueryStringVectorProperty<AnotationEntity>(_entities[1].properties[3]);
 }
