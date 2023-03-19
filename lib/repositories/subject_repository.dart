@@ -10,17 +10,15 @@ class SubjectRepository {
     store = await openStore();
   }
 
-  //Future<void> save({required String name, required String professor}) async {
-    //SujectEntity subjectEntity = SujectEntity(name: name, professor: professor);
-    Future<void> save({required SujectEntity subjectEntity}) async {
-    Box subjectBox = store.box<SujectEntity>();
+    Future<void> save({required SubjectEntity subjectEntity}) async {
+    Box subjectBox = store.box<SubjectEntity>();
     subjectBox.put(subjectEntity);
   }
 
-  Future<List<SujectEntity>> get() async {
-    Box subjectBox = store.box<SujectEntity>();
+  Future<List<SubjectEntity>> get() async {
+    Box subjectBox = store.box<SubjectEntity>();
     final subject = subjectBox.getAll();
-    return subject as List<SujectEntity>;
+    return subject as List<SubjectEntity>;
   }
 
   remove() async {

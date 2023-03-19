@@ -18,11 +18,11 @@ abstract class _HomeControllerBase with Store {
   TextEditingController subjectProfessorTextfieldController = TextEditingController();
 
   @observable
-  ObservableList<SujectEntity> subjects = ObservableList<SujectEntity>();
+  ObservableList<SubjectEntity> subjects = ObservableList<SubjectEntity>();
 
   @action
   Future<void> createSubject() async {
-    SujectEntity subjectEntity = SujectEntity(
+    SubjectEntity subjectEntity = SubjectEntity(
       name: subjectNameTextfieldController.text,
       professor: subjectProfessorTextfieldController.text
     );

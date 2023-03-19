@@ -4,30 +4,6 @@
   "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
   "entities": [
     {
-      "id": "1:7655759539583557121",
-      "lastPropertyId": "3:5926166880424149487",
-      "name": "SujectEntity",
-      "properties": [
-        {
-          "id": "1:6122550022959202681",
-          "name": "id",
-          "type": 6,
-          "flags": 1
-        },
-        {
-          "id": "2:6552143575570388777",
-          "name": "name",
-          "type": 9
-        },
-        {
-          "id": "3:5926166880424149487",
-          "name": "professor",
-          "type": 9
-        }
-      ],
-      "relations": []
-    },
-    {
       "id": "2:8068563579642085581",
       "lastPropertyId": "4:8223025405263496351",
       "name": "AnotationEntity",
@@ -55,17 +31,47 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "3:399700231528899954",
+      "lastPropertyId": "3:2152761758868518802",
+      "name": "SubjectEntity",
+      "properties": [
+        {
+          "id": "1:5973450990416420856",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:1261053029994463825",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "3:2152761758868518802",
+          "name": "professor",
+          "type": 9
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "2:8068563579642085581",
+  "lastEntityId": "3:399700231528899954",
   "lastIndexId": "0:0",
   "lastRelationId": "0:0",
   "lastSequenceId": "0:0",
   "modelVersion": 5,
   "modelVersionParserMinimum": 5,
-  "retiredEntityUids": [],
+  "retiredEntityUids": [
+    7655759539583557121
+  ],
   "retiredIndexUids": [],
-  "retiredPropertyUids": [],
+  "retiredPropertyUids": [
+    6122550022959202681,
+    6552143575570388777,
+    5926166880424149487
+  ],
   "retiredRelationUids": [],
   "version": 1
 }

@@ -13,23 +13,31 @@ mixin _$HomeController on _HomeControllerBase, Store {
       Atom(name: '_HomeControllerBase.subjects', context: context);
 
   @override
-  ObservableList<SujectEntity> get subjects {
+  ObservableList<SubjectEntity> get subjects {
     _$subjectsAtom.reportRead();
     return super.subjects;
   }
 
   @override
-  set subjects(ObservableList<SujectEntity> value) {
+  set subjects(ObservableList<SubjectEntity> value) {
     _$subjectsAtom.reportWrite(value, super.subjects, () {
       super.subjects = value;
     });
+  }
+
+  late final _$createSubjectAsyncAction =
+      AsyncAction('_HomeControllerBase.createSubject', context: context);
+
+  @override
+  Future<void> createSubject() {
+    return _$createSubjectAsyncAction.run(() => super.createSubject());
   }
 
   late final _$getSubjectsAsyncAction =
       AsyncAction('_HomeControllerBase.getSubjects', context: context);
 
   @override
-  Future getSubjects() {
+  Future<void> getSubjects() {
     return _$getSubjectsAsyncAction.run(() => super.getSubjects());
   }
 

@@ -21,30 +21,6 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <ModelEntity>[
   ModelEntity(
-      id: const IdUid(1, 7655759539583557121),
-      name: 'SujectEntity',
-      lastPropertyId: const IdUid(3, 5926166880424149487),
-      flags: 0,
-      properties: <ModelProperty>[
-        ModelProperty(
-            id: const IdUid(1, 6122550022959202681),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        ModelProperty(
-            id: const IdUid(2, 6552143575570388777),
-            name: 'name',
-            type: 9,
-            flags: 0),
-        ModelProperty(
-            id: const IdUid(3, 5926166880424149487),
-            name: 'professor',
-            type: 9,
-            flags: 0)
-      ],
-      relations: <ModelRelation>[],
-      backlinks: <ModelBacklink>[]),
-  ModelEntity(
       id: const IdUid(2, 8068563579642085581),
       name: 'AnotationEntity',
       lastPropertyId: const IdUid(4, 8223025405263496351),
@@ -72,6 +48,30 @@ final _entities = <ModelEntity>[
             flags: 0)
       ],
       relations: <ModelRelation>[],
+      backlinks: <ModelBacklink>[]),
+  ModelEntity(
+      id: const IdUid(3, 399700231528899954),
+      name: 'SubjectEntity',
+      lastPropertyId: const IdUid(3, 2152761758868518802),
+      flags: 0,
+      properties: <ModelProperty>[
+        ModelProperty(
+            id: const IdUid(1, 5973450990416420856),
+            name: 'id',
+            type: 6,
+            flags: 1),
+        ModelProperty(
+            id: const IdUid(2, 1261053029994463825),
+            name: 'name',
+            type: 9,
+            flags: 0),
+        ModelProperty(
+            id: const IdUid(3, 2152761758868518802),
+            name: 'professor',
+            type: 9,
+            flags: 0)
+      ],
+      relations: <ModelRelation>[],
       backlinks: <ModelBacklink>[])
 ];
 
@@ -95,52 +95,25 @@ Future<Store> openStore(
 ModelDefinition getObjectBoxModel() {
   final model = ModelInfo(
       entities: _entities,
-      lastEntityId: const IdUid(2, 8068563579642085581),
+      lastEntityId: const IdUid(3, 399700231528899954),
       lastIndexId: const IdUid(0, 0),
       lastRelationId: const IdUid(0, 0),
       lastSequenceId: const IdUid(0, 0),
-      retiredEntityUids: const [],
+      retiredEntityUids: const [7655759539583557121],
       retiredIndexUids: const [],
-      retiredPropertyUids: const [],
+      retiredPropertyUids: const [
+        6122550022959202681,
+        6552143575570388777,
+        5926166880424149487
+      ],
       retiredRelationUids: const [],
       modelVersion: 5,
       modelVersionParserMinimum: 5,
       version: 1);
 
   final bindings = <Type, EntityDefinition>{
-    SujectEntity: EntityDefinition<SujectEntity>(
-        model: _entities[0],
-        toOneRelations: (SujectEntity object) => [],
-        toManyRelations: (SujectEntity object) => {},
-        getId: (SujectEntity object) => object.id,
-        setId: (SujectEntity object, int id) {
-          object.id = id;
-        },
-        objectToFB: (SujectEntity object, fb.Builder fbb) {
-          final nameOffset = fbb.writeString(object.name);
-          final professorOffset = fbb.writeString(object.professor);
-          fbb.startTable(4);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, nameOffset);
-          fbb.addOffset(2, professorOffset);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-
-          final object = SujectEntity(
-              name: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 6, ''),
-              professor: const fb.StringReader(asciiOptimization: true)
-                  .vTableGet(buffer, rootOffset, 8, ''))
-            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-
-          return object;
-        }),
     AnotationEntity: EntityDefinition<AnotationEntity>(
-        model: _entities[1],
+        model: _entities[0],
         toOneRelations: (AnotationEntity object) => [],
         toManyRelations: (AnotationEntity object) => {},
         getId: (AnotationEntity object) => object.id,
@@ -180,42 +153,73 @@ ModelDefinition getObjectBoxModel() {
             ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
 
           return object;
+        }),
+    SubjectEntity: EntityDefinition<SubjectEntity>(
+        model: _entities[1],
+        toOneRelations: (SubjectEntity object) => [],
+        toManyRelations: (SubjectEntity object) => {},
+        getId: (SubjectEntity object) => object.id,
+        setId: (SubjectEntity object, int id) {
+          object.id = id;
+        },
+        objectToFB: (SubjectEntity object, fb.Builder fbb) {
+          final nameOffset = fbb.writeString(object.name);
+          final professorOffset = fbb.writeString(object.professor);
+          fbb.startTable(4);
+          fbb.addInt64(0, object.id);
+          fbb.addOffset(1, nameOffset);
+          fbb.addOffset(2, professorOffset);
+          fbb.finish(fbb.endTable());
+          return object.id;
+        },
+        objectFromFB: (Store store, ByteData fbData) {
+          final buffer = fb.BufferContext(fbData);
+          final rootOffset = buffer.derefObject(0);
+
+          final object = SubjectEntity(
+              name: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 6, ''),
+              professor: const fb.StringReader(asciiOptimization: true)
+                  .vTableGet(buffer, rootOffset, 8, ''))
+            ..id = const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
+
+          return object;
         })
   };
 
   return ModelDefinition(model, bindings);
 }
 
-/// [SujectEntity] entity fields to define ObjectBox queries.
-class SujectEntity_ {
-  /// see [SujectEntity.id]
-  static final id =
-      QueryIntegerProperty<SujectEntity>(_entities[0].properties[0]);
-
-  /// see [SujectEntity.name]
-  static final name =
-      QueryStringProperty<SujectEntity>(_entities[0].properties[1]);
-
-  /// see [SujectEntity.professor]
-  static final professor =
-      QueryStringProperty<SujectEntity>(_entities[0].properties[2]);
-}
-
 /// [AnotationEntity] entity fields to define ObjectBox queries.
 class AnotationEntity_ {
   /// see [AnotationEntity.id]
   static final id =
-      QueryIntegerProperty<AnotationEntity>(_entities[1].properties[0]);
+      QueryIntegerProperty<AnotationEntity>(_entities[0].properties[0]);
 
   /// see [AnotationEntity.name]
   static final name =
-      QueryStringProperty<AnotationEntity>(_entities[1].properties[1]);
+      QueryStringProperty<AnotationEntity>(_entities[0].properties[1]);
 
   /// see [AnotationEntity.description]
   static final description =
-      QueryStringProperty<AnotationEntity>(_entities[1].properties[2]);
+      QueryStringProperty<AnotationEntity>(_entities[0].properties[2]);
 
   /// see [AnotationEntity.images]
   static final images =
-      QueryStringVectorProperty<AnotationEntity>(_entities[1].properties[3]);
+      QueryStringVectorProperty<AnotationEntity>(_entities[0].properties[3]);
+}
+
+/// [SubjectEntity] entity fields to define ObjectBox queries.
+class SubjectEntity_ {
+  /// see [SubjectEntity.id]
+  static final id =
+      QueryIntegerProperty<SubjectEntity>(_entities[1].properties[0]);
+
+  /// see [SubjectEntity.name]
+  static final name =
+      QueryStringProperty<SubjectEntity>(_entities[1].properties[1]);
+
+  /// see [SubjectEntity.professor]
+  static final professor =
+      QueryStringProperty<SubjectEntity>(_entities[1].properties[2]);
 }

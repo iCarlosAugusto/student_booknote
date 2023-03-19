@@ -1,7 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:student_booknote/widgets/appbar_widget.dart';
 import 'package:student_booknote/widgets/button_option_widget.dart';
 import 'package:student_booknote/widgets/button_widget.dart';
